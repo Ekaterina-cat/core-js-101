@@ -35,8 +35,8 @@ function findElement(arr, value) {
  *    2 => [ 1, 3 ]
  *    5 => [ 1, 3, 5, 7, 9 ]
  */
-function generateOdds(/* len */) {
-  throw new Error('Not implemented');
+function generateOdds(len) {
+  return Array.from({ length: len }, (_, i) => 2 * i + 1);
 }
 
 
@@ -235,8 +235,12 @@ function toArrayOfSquares(arr) {
  *   [ 0, 0, 0, 0, 0]         => [ 0, 0, 0, 0, 0]
  *   [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ] => [ 1, 3, 6, 10, 15, 21, 28, 36, 45, 55 ]
  */
-function getMovingSum(/* arr */) {
-  throw new Error('Not implemented');
+function getMovingSum(arr) {
+  let prevSum = 0;
+  return arr.map((num) => {
+    prevSum += num;
+    return prevSum;
+  });
 }
 
 /**
@@ -287,8 +291,8 @@ function propagateItemsByPositionIndex(/* arr */) {
  *   [ 1,2,3,4,5,6,7,8,9,10 ] => [ 10, 9, 8 ]
  *   [ 10, 10, 10, 10 ] => [ 10, 10, 10 ]
  */
-function get3TopItems(/* arr */) {
-  throw new Error('Not implemented');
+function get3TopItems(arr) {
+  return [...arr].sort((a, b) => b - a).slice(0, 3);
 }
 
 
@@ -323,8 +327,21 @@ function getPositivesCount(arr) {
  *   [ 'nine','eight','nine','eight'] => [ 'eight','eight','nine','nine']
  *   [ 'one','one','one','zero' ]     => [ 'zero','one','one','one' ]
  */
-function sortDigitNamesByNumericOrder(/* arr */) {
-  throw new Error('Not implemented');
+function sortDigitNamesByNumericOrder(arr) {
+  const objNum = {
+    zero: 0,
+    one: 1,
+    two: 2,
+    three: 3,
+    four: 4,
+    five: 5,
+    six: 6,
+    seven: 7,
+    eight: 8,
+    nine: 9,
+  };
+
+  return arr.sort((a, b) => objNum[a] - objNum[b]);
 }
 
 /**
@@ -422,8 +439,14 @@ function toStringList(arr) {
  *      { country: 'Russia',  city: 'Saint Petersburg' }
  *    ]
  */
-function sortCitiesArray(/* arr */) {
-  throw new Error('Not implemented');
+function sortCitiesArray(arr) {
+  return arr.sort((a, b) => {
+    const countryCompare = a.country.localeCompare(b.country);
+    if (countryCompare === 0) {
+      return a.city.localeCompare(b.city);
+    }
+    return countryCompare;
+  });
 }
 
 /**
@@ -461,8 +484,13 @@ function getIdentityMatrix(/* n */) {
  *     0, 100 => [ 0, 1, 2, ..., 100 ]
  *     3, 3   => [ 3 ]
  */
-function getIntervalArray(/* start, end */) {
-  throw new Error('Not implemented');
+function getIntervalArray(start, end) {
+  let numericStart = Number(start);
+  let numericEnd = Number(end);
+  if (numericStart > numericEnd) {
+    [numericStart, numericEnd] = [numericEnd, numericStart];
+  }
+  return Array.from({ length: numericEnd - numericStart + 1 }, (_, index) => numericStart + index);
 }
 
 /**
